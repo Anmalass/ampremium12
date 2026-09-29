@@ -5,11 +5,11 @@ const { friendlyFirebaseError } = require('../../../lib/errors')
 const router = express.Router()
 
 router.post('/', async (req, res) => {
-  const { email } = req.body
-  if (!email || !email.includes('@') || !email.includes('.')) {
+  const { gmail } = req.body
+  if (!gmail || !gmail.includes('@') || !gmail.includes('.')) {
     return res.status(400).json({ success: false, message: 'email gak valid.' })
   }
-  const em = email.trim().toLowerCase()
+  const em = gmail.trim().toLowerCase()
   const r = await auth.link(em)
   if (!r.ok) {
     return res.status(400).json({ success: false, message: friendlyFirebaseError(r.why), code: r.why })
